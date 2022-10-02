@@ -6,6 +6,7 @@ import com.flavio.java8.model.ConsumidorDeString;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class Testa {
     public static void main(String[] args) {
@@ -40,9 +41,21 @@ public class Testa {
             System.out.println(time); // Utilizando Lambdas
         });
 
+        // Simplificando o Lambda
+        //times.forEach(time -> System.out.println(time));
+
         System.out.println("----------------");
         ConsumidorDeString consumidor = new ConsumidorDeString(); // Utilizando uma classe que implemente Consumer
         times.forEach(consumidor);
+
+        System.out.println("----------------");
+        // Utilizando classes anônimas
+        times.forEach(new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                System.out.println("Time: " + s);
+            }
+        });
 
     }
 
