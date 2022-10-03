@@ -2,11 +2,11 @@ package com.flavio.java8.test;
 
 import com.flavio.java8.model.ComparadorDeStringPorTamanho;
 import com.flavio.java8.model.ConsumidorDeString;
+import com.flavio.java8.model.Pessoa;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class Testa {
     public static void main(String[] args) {
@@ -19,6 +19,9 @@ public class Testa {
         times.add("Barcelona");
 
         Collections.sort(times); // vai classificar a lista apartir do método de comparação implementado na classe String
+        // o método sort precisa de um objeto que implemente a interface Comparable
+        // nesse caso estamos passando uma lista de times que é uma lista de Strings
+        // String implementa a interface Comparable
 
         System.out.println(times);
 
@@ -57,6 +60,21 @@ public class Testa {
             }
         });
 
-    }
 
+        Function<String, Integer> funcao = s -> s.length(); // usando lambda
+        //Function<String, Integer> funcao = String::length; // usando method reference
+        Comparator<String> comparator = Comparator.comparing(funcao);
+        times.sort(comparator);
+
+        List<Pessoa> pessoas = new ArrayList<>();
+        pessoas.add(new Pessoa("Ricardo"));
+        pessoas.add(new Pessoa("Alex"));
+        pessoas.add(new Pessoa("Jair"));
+
+        pessoas.forEach(Pessoa::dizOla); // usando method reference
+        pessoas.forEach(pessoa -> {
+            pessoa.dizOla();
+        }); // usando lambda
+
+    }
 }
