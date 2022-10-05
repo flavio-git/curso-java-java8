@@ -50,5 +50,11 @@ public class TestaCursos {
 
         System.out.println(novaLista);
 
+        // Calculando a média de quantidade de alunos
+        OptionalDouble mediaDeAlunos = cursos.stream().mapToInt(Curso::getQtdeAlunos).average();
+        double media = mediaDeAlunos.getAsDouble();
+
+        System.out.println("Média de alunos é: " + media);
+
     }
 }
